@@ -52,24 +52,6 @@ def add_page_to_index(index, url, content):
     for word in words:
         add_to_index(index,word,url)
 
-def compute_ranks(graph):
-    d = 0.8
-    N = len(graph)
-    numloops = 10
-    ranks = {}
-    for page in graph:
-        ranks[page] = 1/N
-    for i in range(0, numloops):
-        newranks = {}
-        for page in graph:
-            newrank = (1-d)/N
-            for node in graph:
-                if page in graph[node]:
-                    newrank = newrank + d*(ranks[node]/len(graph[node]))
-            newranks[page] = newrank
-        ranks = newranks
-    return newranks
-
 def crawl_web(seed):
     tocrawl = [seed]
     crawled = []
